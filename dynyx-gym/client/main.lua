@@ -2,8 +2,8 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 CreateThread(function()
   for k, v in pairs(config.Threadmills) do
-    exports['qb-target']:AddBoxZone("treadmill"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
-      name = "treadmill",
+    exports['qb-target']:AddBoxZone("tredmil"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
+      name = "tredmil",
       heading = 300,
       debugPoly = false,
       minZ = 30.0,
@@ -215,66 +215,132 @@ local function ChinupsAnim2()
 end
 
 function Treadmill()
-  QBCore.Functions.Progressbar("random_task", "Jogging", 2000, false, true, {
-    disableMovement = false,
-    disableCarMovement = false,
-    disableMouse = false,
-    disableCombat = true,
-  }, {
-    animDict = "move_m@jogger",
-    anim = "idle",
-    flags = 8,
-  }, {}, {}, function() -- Done
-    ClearPedTasks(PlayerPedId())
-    Wait(3000)
-    exports["mz-skills"]:UpdateSkill(config.Skills.ThreadMills.skill, config.Skills.ThreadMills.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:GainStress', config.Skills.ThreadMills.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+  QBCore.Functions.Progressbar('random_task', 'Jogging', 2000, false, false, {
+      disableMovement = true,
+      disableCarMovement = true,
+      disableMouse = false,
+      disableCombat = true,
+    }, {
+      animDict = "move_m@jogger",
+      anim = "idle",
+      flags = 8,
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          exports["mz-skills"]:UpdateSkill(config.Skills.ThreadMills.skill, config.Skills.ThreadMills.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.ThreadMills.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.ThreadMills.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.ThreadMills.Minigame.circles, config.Skills.ThreadMills.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.ThreadMills.Minigame.circles, config.Skills.ThreadMills.Minigame.time, success)
+      if success then
+        TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
+        Wait(100)
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        exports["mz-skills"]:UpdateSkill(config.Skills.ThreadMills.skill, config.Skills.ThreadMills.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.ThreadMills.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.ThreadMills.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
+
 
 function Chinup()
   QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', 10000, false, false, {
-      disableMovement = true, 
+      disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
       disableCombat = true,
-  }, {
+    }, {
       ChinupsAnim()
-  }, {}, {}, function()  
-    ClearPedTasks(PlayerPedId())
-    Wait(3000)
-    exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.Chinups.Minigame.circles, config.Skills.Chinups.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.Chinups.Minigame.circles, config.Skills.Chinups.Minigame.time, success)
+      if success then
+        exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
+
 
 function Chinup2()
   QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', 10000, false, false, {
-      disableMovement = true, 
+      disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
       disableCombat = true,
-  }, {
+    }, {
       ChinupsAnim2()
-  }, {}, {}, function()  
-    ClearPedTasks(PlayerPedId())
-    Wait(3000)
-    exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.Chinups.Minigame.circles, config.Skills.Chinups.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.Chinups.Minigame.circles, config.Skills.Chinups.Minigame.time, success)
+      if success then
+        exports["mz-skills"]:UpdateSkill(config.Skills.Chinups.skill, config.Skills.Chinups.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.Chinups.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
+
 
 function LiftWeight()
   QBCore.Functions.Progressbar('random_task', 'Lifting Weights', 10000, false, false, {
@@ -282,21 +348,40 @@ function LiftWeight()
       disableCarMovement = true,
       disableMouse = false,
       disableCombat = true,
-  }, 
-  {
-    animDict = "amb@world_human_muscle_free_weights@male@barbell@base",
-    anim = "base",
-    flags = 8,
-  }, {}, {}, function() 
-    ClearPedTasks(PlayerPedId())
-    Wait(3000)
-    exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+    }, {
+      animDict = "amb@world_human_muscle_free_weights@male@barbell@base",
+      anim = "base",
+      flags = 8,
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.LiftWeights.Minigame.circles, config.Skills.LiftWeights.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.LiftWeights.Minigame.circles, config.Skills.LiftWeights.Minigame.time, success)
+      if success then
+        exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
 
 function LiftWeight2()
@@ -305,40 +390,95 @@ function LiftWeight2()
       disableCarMovement = true,
       disableMouse = false,
       disableCombat = true,
-  }, 
-  {
-    animDict = "amb@world_human_muscle_free_weights@male@barbell@base",
-    anim = "base",
-    flags = 8,
-  }, {}, {}, function() 
-    exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+    }, {
+      animDict = "amb@world_human_muscle_free_weights@male@barbell@base",
+      anim = "base",
+      flags = 8,
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.LiftWeights.Minigame.circles, config.Skills.LiftWeights.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.LiftWeights.Minigame.circles, config.Skills.LiftWeights.Minigame.time, success)
+      if success then
+        exports["mz-skills"]:UpdateSkill(config.Skills.LiftWeights.skill, config.Skills.LiftWeights.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.LiftWeights.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
 
+
+
 function Yoga()
-  QBCore.Functions.Progressbar('random_task', 'Doing Yoga', 10000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Doing Yoga', 1000, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
       disableCombat = true,
-  }, {
+    }, {
       animDict = "missfam5_yoga",
       anim = "i_yogapose_a",
       flag = 8,
-  }, {}, {}, function() 
-    TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
-    Wait(100)
-    TriggerEvent('animations:client:EmoteCommandStart', {"c"})
-    exports["mz-skills"]:UpdateSkill(config.Skills.Yoga.skill, config.Skills.Yoga.amount)
-    Wait(2000)
-    TriggerServerEvent('hud:server:RelieveStress', config.Skills.Yoga.Stress)
-    TriggerEvent('inventory:client:busy:status', false)
-    Wait(3000)
-    QBCore.Functions.Notify("Your moving too quick, Drink some water", "error") 
- end)
+    }, {}, {}, function() 
+       --------------------------------------------------------------------------------------------   ps-ui section
+    if config.Minigame == 'ps-ui' then
+      exports['ps-ui']:Circle(function(success)
+        if success then
+          TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
+          Wait(100)
+          TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+          exports["mz-skills"]:UpdateSkill(config.Skills.Yoga.skill, config.Skills.Yoga.amount)
+          Wait(2000)
+          TriggerServerEvent('hud:server:RelieveStress', config.Skills.Yoga.Stress)
+          TriggerEvent('inventory:client:busy:status', false)
+        else --failed
+          TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
+          Wait(100)
+          TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+          QBCore.Functions.Notify("That did not feel too good..", "error")
+          Wait(3000)
+          TriggerServerEvent('hud:server:GainStress', config.Skills.Yoga.Minigame.FailedMinigameStress)
+        end
+      end, config.Skills.Yoga.Minigame.circles, config.Skills.Yoga.Minigame.time)
+      --------------------------------------------------------------------------------------------   qb-lock section
+    elseif config.Minigame == 'qb-lock' then
+      local success = exports['qb-lock']:StartLockPickCircle(config.Skills.Yoga.Minigame.circles, config.Skills.Yoga.Minigame.time, success)
+      if success then
+        TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
+        Wait(100)
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        exports["mz-skills"]:UpdateSkill(config.Skills.Yoga.skill, config.Skills.Yoga.amount)
+        Wait(2000)
+        TriggerServerEvent('hud:server:RelieveStress', config.Skills.Yoga.Stress)
+        TriggerEvent('inventory:client:busy:status', false)
+      else --failed
+        TriggerEvent('animations:client:EmoteCommandStart', {"dance"})
+        Wait(100)
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+        QBCore.Functions.Notify("That did not feel too good..", "error")
+        Wait(3000)
+        TriggerServerEvent('hud:server:GainStress', config.Skills.Yoga.Minigame.FailedMinigameStress)
+      end
+    end
+  end)
 end
+
