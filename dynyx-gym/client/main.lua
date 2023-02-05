@@ -101,8 +101,8 @@ CreateThread(function()
           {
             type = "client",
             event = 'dynyx-gym:yoga',
-            icon = "fas fa-face-smile-relaxed",
-            label = 'Yoga'
+            icon = "fas fa-face-smile",
+            label = 'Start Yoga'
             },
         },
         distance = 2.0
