@@ -1,5 +1,5 @@
 # dynyx-gym
-This is a Advanced Gym System were players can workout to gain strength and stamina!
+This is a Advanced Gym System were players can workout to gain strength and stamina.
 
 | Join my discord server [here](https://discord.gg/A4gVRjnvaE) |
 | ------------------------------------------------------------ |
@@ -21,6 +21,7 @@ This is a Advanced Gym System were players can workout to gain strength and stam
 ## Dependencies
 # mz-skills: https://github.com/GreenSlayer/mz-skills
 # Gym MLO: https://www.gta5-mods.com/maps/mlo-pump-run-gym-add-on-sp-fivem-ragemp
+# Qbcore: https://github.com/qbcore-framework/qb-core
 
 # Configuration
 ```
