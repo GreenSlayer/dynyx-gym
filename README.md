@@ -7,7 +7,7 @@ This is a Advanced Gym System were players can workout to gain strength and stam
 ## Preview: https://youtu.be/sbJX8-YOzSk
 
 ## How to Install
-1. Drag dynyx-ring into your resources folder then ensure dynyx-rings in your cfg file.
+1. Drag dynyx-gym into your resources folder then ensure dynyx-gym in your cfg file.
 2. Go to qb-core/shared/items.lua and paste this
 ```lua
 --Dynyx-Gym
