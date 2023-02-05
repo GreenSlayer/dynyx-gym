@@ -16,26 +16,49 @@ config.GymPass = {
     item = "gym_pass" -- The Item Name for the Gym Membership
 }
 
+config.Minigame = 'ps-ui' -- qb-lock / ps-ui 
+
+
 config.Skills = {
     ['ThreadMills'] = {
         skill = 'Stamina', -- The Type of Skill
         amount = math.random(0, 1),  -- The amount of skill rep you gain
         Stress = math.random(5, 9), -- GainStress -- You Can set the amount of Stress you gain here
+        Minigame = { -- Circle Minigame
+            time = 23,
+            circles = 8,
+            FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
+        }
     },
     ['Chinups'] = {
         skill = 'Strength', -- The Type of Skill
         amount = math.random(0, 2),  -- The amount of skill rep you gain
         Stress = math.random(5, 9), -- GainStress -- You Can set the amount of Stress you gain here
+        Minigame = { -- Circle Minigame
+            time = 20,
+            circles = 7,
+            FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
+        }
     },
     ['LiftWeights'] = {
         skill = 'Strength', -- The Type of Skill
         amount = math.random(0, 2),  -- The amount of skill rep you gain
         Stress = math.random(5, 9), -- GainStress -- You Can set the amount of Stress you gain here
+        Minigame = { -- Circle Minigame
+            time = 18,
+            circles = 8,
+            FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
+        }
     },
     ['Yoga'] = {
         skill = 'Stamina', -- The Type of Skill
         amount = math.random(0, 0),  -- The amount of skill rep you gain
-        Stress = math.random(10, 15), --RelieveStress -- You Can set the amount of Stress you relieve here
+        Stress = math.random(15, 20), --RelieveStress -- You Can set the amount of Stress you relieve here
+        Minigame = { -- Circle Minigame
+            time = 18, 
+            circles = 8,
+            FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
+        }
     },
 }
 
