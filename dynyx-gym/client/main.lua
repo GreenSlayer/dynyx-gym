@@ -2,8 +2,8 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 CreateThread(function()
   for k, v in pairs(config.Threadmills) do
-    exports['qb-target']:AddBoxZone("tredmil"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
-      name = "tredmil",
+    exports['qb-target']:AddBoxZone("treadmill"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
+      name = "treadmill",
       heading = 300,
       debugPoly = false,
       minZ = 30.0,
@@ -215,7 +215,7 @@ local function ChinupsAnim2()
 end
 
 function Treadmill()
-  QBCore.Functions.Progressbar('random_task', 'Jogging', 2000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Jogging', config.Skills.ThreadMills.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -261,7 +261,7 @@ end
 
 
 function Chinup()
-  QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', 10000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', config.Skills.Chinups.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -302,7 +302,7 @@ end
 
 
 function Chinup2()
-  QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', 10000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Doing Chin-ups', config.Skills.Chinups.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -343,7 +343,7 @@ end
 
 
 function LiftWeight()
-  QBCore.Functions.Progressbar('random_task', 'Lifting Weights', 10000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Lifting Weights', config.Skills.LiftWeights.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -385,7 +385,7 @@ function LiftWeight()
 end
 
 function LiftWeight2()
-  QBCore.Functions.Progressbar('random_task', 'Lifting Weights', 10000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Lifting Weights', config.Skills.LiftWeights.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
@@ -429,7 +429,7 @@ end
 
 
 function Yoga()
-  QBCore.Functions.Progressbar('random_task', 'Doing Yoga', 1000, false, false, {
+  QBCore.Functions.Progressbar('random_task', 'Doing Yoga', config.Skills.Yoga.ProgressbarDuration, false, false, {
       disableMovement = true,
       disableCarMovement = true,
       disableMouse = false,
