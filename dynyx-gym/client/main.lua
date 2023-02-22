@@ -32,7 +32,7 @@ CreateThread(function()
           {
             type = "client",
             event = 'dynyx-gym:chinup',
-            icon = "fas fa-up",
+            icon = "fa-solid fa-arrow-up",
             label = 'Do Chinups'
             },
         },
@@ -50,7 +50,7 @@ CreateThread(function()
           {
             type = "client",
             event = 'dynyx-gym:chinup2',
-            icon = "fas fa-up",
+            icon = "fa-solid fa-arrow-up",
             label = 'Do Chinups'
             },
         },
