@@ -109,71 +109,59 @@ CreateThread(function()
       })
     end
 end)
-RegisterNetEvent('dynyx-gym:treadmill')
-AddEventHandler('dynyx-gym:treadmill',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			Treadmill()
-		else 
-			QBCore.Functions.Notify("You dont have a membership pass", "error")
-		end 
-	end, "gym_pass")
+
+RegisterNetEvent('dynyx-gym:treadmill', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    Treadmill()
+  else
+    QBCore.Functions.Notify("You dont have a membership pass", "error")
+  end
 end)
 
-RegisterNetEvent('dynyx-gym:chinup')
-AddEventHandler('dynyx-gym:chinup',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			Chinup()
-		else 
-			QBCore.Functions.Notify("You dont own a membership!", "error")
-		end 
-	end, "gym_pass")
+RegisterNetEvent('dynyx-gym:chinup', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    Chinup()
+  else
+    QBCore.Functions.Notify("You dont own a membership!", "error")
+  end
 end)
 
-RegisterNetEvent('dynyx-gym:chinup2')
-AddEventHandler('dynyx-gym:chinup2',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			Chinup2()
-		else 
-			QBCore.Functions.Notify("You dont own a membership!", "error")
-		end 
-	end, "gym_pass")
+RegisterNetEvent('dynyx-gym:chinup2', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    Chinup2()
+  else
+    QBCore.Functions.Notify("You dont own a membership!", "error")
+  end
 end)
 
-
-RegisterNetEvent('dynyx-gym:liftweights')
-AddEventHandler('dynyx-gym:liftweights',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			LiftWeight()
-		else 
-			QBCore.Functions.Notify("You dont own a membership!", "error")
-		end 
-	end, "gym_pass")
+RegisterNetEvent('dynyx-gym:liftweights', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    LiftWeight()
+  else
+    QBCore.Functions.Notify("You dont own a membership!", "error")
+  end
 end)
 
-RegisterNetEvent('dynyx-gym:liftweights2')
-AddEventHandler('dynyx-gym:liftweights2',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			LiftWeight2()
-		else 
-			QBCore.Functions.Notify("You dont own a membership!", "error")
-		end 
-	end, "gym_pass")
+RegisterNetEvent('dynyx-gym:liftweights2', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    LiftWeight2()
+  else
+    QBCore.Functions.Notify("You dont own a membership!", "error")
+  end
 end)
 
-RegisterNetEvent('dynyx-gym:yoga')
-AddEventHandler('dynyx-gym:yoga',function() 
-	QBCore.Functions.TriggerCallback("QBCore:HasItem", function(data) 
-		if data then 
-			Yoga()
-		else 
-			QBCore.Functions.Notify("You dont own a membership!", "error")
-		end 
-	end, "gym_pass")
+RegisterNetEvent('dynyx-gym:yoga', function()
+  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  if hasItem then
+    Yoga()
+  else
+    QBCore.Functions.Notify("You dont own a membership!", "error")
+  end
 end)
 
 local function loadAnimDict(dict)
