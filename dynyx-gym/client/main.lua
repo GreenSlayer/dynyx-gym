@@ -110,9 +110,8 @@ CreateThread(function()
     end
 end)
 
-
 RegisterNetEvent('dynyx-gym:treadmill', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     Treadmill()
   else
@@ -121,7 +120,7 @@ RegisterNetEvent('dynyx-gym:treadmill', function()
 end)
 
 RegisterNetEvent('dynyx-gym:chinup', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     Chinup()
   else
@@ -130,7 +129,7 @@ RegisterNetEvent('dynyx-gym:chinup', function()
 end)
 
 RegisterNetEvent('dynyx-gym:chinup2', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     Chinup2()
   else
@@ -139,7 +138,7 @@ RegisterNetEvent('dynyx-gym:chinup2', function()
 end)
 
 RegisterNetEvent('dynyx-gym:liftweights', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     LiftWeight()
   else
@@ -148,7 +147,7 @@ RegisterNetEvent('dynyx-gym:liftweights', function()
 end)
 
 RegisterNetEvent('dynyx-gym:liftweights2', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     LiftWeight2()
   else
@@ -157,7 +156,7 @@ RegisterNetEvent('dynyx-gym:liftweights2', function()
 end)
 
 RegisterNetEvent('dynyx-gym:yoga', function()
-  local hasItem = QBCore.Functions.HasItem('gym_pass')
+  local hasItem = QBCore.Functions.HasItem(config.GymPass.item)
   if hasItem then
     Yoga()
   else
