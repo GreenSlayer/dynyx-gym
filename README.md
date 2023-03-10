@@ -19,7 +19,7 @@ This is a Advanced Gym System were players can workout to gain strength and stam
 
 
 ## Dependencies
-# mz-skills: https://github.com/MrZainRP/mz-skills
+# mz-skills: https://github.com/GreenSlayer/mz-skills
 # Gym MLO: https://www.gta5-mods.com/maps/mlo-pump-run-gym-add-on-sp-fivem-ragemp
 # qb-core: https://github.com/qbcore-framework/qb-core
 # PS-UI: https://github.com/Project-Sloth/ps-ui
