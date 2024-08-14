@@ -2,22 +2,23 @@ fx_version 'cerulean'
 game 'gta5'
 
 name "dynyx-gym"
-description "Gym Workout Script made for DynyxRP"
+description "Gym Workout Script made by Dynyx Scripts"
 author "Green"
-version "1.0."
+version "2.0"
+
+lua54 'yes'
+
+shared_scripts {
+	-- "@ox_lib/init.lua", -- Uncomment this if you are using OX_LIB
+	"config.lua",
+}
 
 client_scripts {
 	'@PolyZone/client.lua',
 	'@PolyZone/BoxZone.lua',
 	'client/*.lua',
-    'config.lua',
 }
 
 server_scripts {
 	'server/*.lua',
-}
-
-dependencies {
-	'qb-target',
-	'mz-skills'
 }
