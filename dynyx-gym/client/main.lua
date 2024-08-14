@@ -76,7 +76,7 @@ CreateThread(function()
   })
   exports['qb-target']:AddCircleZone("yoga", vector3(-1262.42, -360.93, 36.96), 3, {
     name = "yoga",
-    debugPoly = true,
+    debugPoly = false,
   }, {
     options = {
       {
