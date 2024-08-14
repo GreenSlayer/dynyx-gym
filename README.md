@@ -14,8 +14,23 @@ This is a Advanced Gym System were players can workout to gain strength and stam
 ["gym_pass"]				 = {["name"] = "gym_pass", 					["label"] = "Gym Membership", 			["weight"] = 0, 		["type"] = "item", 		["image"] = "gym_pass.png", 		["unique"] = true, 		["useable"] = false, 	["shouldClose"] = false,   ["combinable"] = nil,   ["description"] = "Lifetime Gym Membership"},
 
 ```
-3. Go to qb-inventory or lj-inventory / html / images and add in the images I put in that images folder.
-4. Make sure to intall all the Dependencies.
+3. If using ox_inventory paste the following in ox_inventory / data / items.lua
+```lua
+	["gym_pass"] = {
+		label = "Gym Membership",
+		weight = 0,
+		close = true,
+		stack = false,
+		description = "Lifetime Gym Membership",
+		client = {
+			image = "gym_pass.png",
+		}
+	},
+```
+4. Go to qb-inventory or lj-inventory / html / images and add in the images I put in that images folder.
+5. If you are using ox_inventory go to ox_inventory / web / images and in the images I put in that image folder.
+6. Make sure to intall all the Dependencies.
+7. IF YOU ARE USING OX_LIB UNCOMMENT "@ox_lib/init.lua", IN fxmanifest.lua
 
 
 ## Dependencies
@@ -26,33 +41,39 @@ This is a Advanced Gym System were players can workout to gain strength and stam
 OR
 # qb-lock: https://github.com/Nathan-FiveM/qb-lock
 
+## Supports 
+# OX_LIB: https://github.com/overextended/ox_lib
+
 # Configuration
 ```
-config = {}
+Config = {}
 
-config.GymNPC = {
-    pedname = "a_m_y_clubcust_04", -- Name of the Ped
-    pedhash = 0xE2210515, -- Hash Code for the Ped
-    pedspawn = vector4(-1255.53, -354.77, 35.96, 296.64) --  Spawn for the Gym Membership Seller NPC
-}
+Config.Target = 'qb' -- ox / qb
+Config.Menu = 'qb' -- ox / qb
+Config.Progressbar = 'qb' -- ox / qb
+Config.Inventory = 'qb' -- ox / qb
+Config.Notifications = 'qb' -- ox / qb
 
-config.GymPass = {
-    Price = 1250, -- Price for the Gym Membership
-    item = "gym_pass" -- The Item Name for the Gym Membership
-}
+Config.GymPed = "a_m_y_clubcust_04" --  Ped Model of the Ped you buy a membership
+Config.GymPedSpawn = vector4(-1255.53, -354.77, 35.96, 296.64) -- Location of the Ped you buy membership and Blip Location
+Config.BlipName = 'Gym' -- Blip Name
 
-config.Minigame = 'ps-ui' -- qb-lock / ps-ui 
+Config.GymPassPrice = 1250 --  Price of Membership
+Config.GymPassItem = 'gym_pass' -- Item Name of Gym Membership
+
+Config.EnableMinigame = true -- (true == Enables Minigame) (false == Disables Minigame)
+Config.Minigame = 'skillCheck' -- qb-lock / ps-ui / skillCheck (Ox_lib Required)(If using skillcheck, Minigame setting wont work)
 
 
-config.Skills = {
+Config.Skills = {
     ['ThreadMills'] = {
         skill = 'Stamina', -- The Type of Skill
         amount = math.random(0, 1),  -- The amount of skill rep you gain
         Stress = math.random(5, 9), -- GainStress -- You Can set the amount of Stress you gain here
         ProgressbarDuration = math.random(1000, 2500), -- This is the duration for the progressbar
         Minigame = { -- Circle Minigame
-            time = 23,
-            circles = 8,
+            time = 5,
+            circles = 1,
             FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
         }
     },
@@ -65,7 +86,9 @@ config.Skills = {
             time = 20,
             circles = 7,
             FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
-        }
+        }, 
+        ChinupAnimCoords = vector4(-1258.79, -355.49, 35.96, 338.63),
+        ChinupAnimCoords2 = vector4(-1257.45, -358.75, 35.96, 294.17)
     },
     ['LiftWeights'] = {
         skill = 'Strength', -- The Type of Skill
@@ -88,6 +111,36 @@ config.Skills = {
             circles = 8,
             FailedMinigameStress = math.random(10, 15) -- If you failed the minigame you will gain stress as a punishment for failing it
         }
+    },
+}
+
+Config.Threadmills = { -- Coords of each Threadmill
+    [1] = {
+        coords = vector3(-1257.55, -366.77, 36.96)
+    },
+    [2] = {
+        coords = vector3(-1259.0, -367.58, 36.96)
+    },
+    [3] = {
+        coords = vector3(-1260.41, -368.4, 36.96)
+    },
+    [4] = {
+        coords = vector3(-1261.93, -369.09, 36.96)
+    },
+    [5] = {
+        coords = vector3(-1263.23, -369.84, 36.96)
+    },
+    [6] = {
+        coords = vector3(-1264.67, -370.58, 36.96)
+    },
+}
+
+Config.LiftWeight = { -- Coords of each Weight
+    [1] = {
+        coords = vector3(-1268.11, -366.05, 36.99)
+    },
+    [2] = {
+        coords = vector3(-1269.8, -362.56, 36.96)
     },
 }
 ```
