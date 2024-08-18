@@ -2,12 +2,12 @@ local QBCore = exports['qb-core']:GetCoreObject()
 
 CreateThread(function()
   for k, v in pairs(Config.Threadmills) do
-    exports['qb-target']:AddBoxZone("treadmill"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
-      name = "treadmill",
+    exports['qb-target']:AddBoxZone("treadmill"..k, v.coords - vector3(0.0, 0.0, 1.0), 1, 2, {
+      name = "treadmill"..k,
       heading = 300,
       debugPoly = false,
-      minZ = 30.0,
-      maxZ = 39.0,
+      minZ = v.coords.z - 1.0,
+      maxZ = v.coords.z + 2.0,
     }, {
       options = {
         {
@@ -18,15 +18,15 @@ CreateThread(function()
         },
       },
       distance = 2.0
-      })
+    })
   end
   for k, v in pairs(Config.LiftWeight) do
-    exports['qb-target']:AddBoxZone("liftweights"..k, vector3(v.coords.x, v.coords.y, v.coords.z-1), 1, 2, {
-      name = "liftweights",
+    exports['qb-target']:AddBoxZone("liftweights"..k, v.coords - vector3(0.0, 0.0, 1.0), 1, 2, {
+      name = "liftweights"..k,
       heading = 300,
       debugPoly = false,
-      minZ = 30.0,
-      maxZ = 39.0,
+      minZ = v.coords.z - 1.0,
+      maxZ = v.coords.z + 2.0,
     }, {
       options = {
         {
@@ -37,7 +37,7 @@ CreateThread(function()
         },
       },
       distance = 2.0
-      })
+    })
   end
   exports['qb-target']:AddBoxZone("chinups", vector3(-1258.97, -356.16, 36.99), 1, 2, {
     name = "chinups",
